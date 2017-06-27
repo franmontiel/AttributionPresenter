@@ -6,7 +6,6 @@ import android.support.annotation.LayoutRes;
 import android.support.v7.app.AlertDialog;
 
 import com.franmontiel.attributionhelper.attribution.Attribution;
-import com.franmontiel.attributionhelper.attribution.AttributionFactory;
 import com.franmontiel.attributionhelper.attribution.Library;
 
 import java.util.Arrays;
@@ -29,7 +28,7 @@ public class AttributionHelper {
 
     public void addAttributions(Library... libraries) {
         for (Library library : libraries) {
-            this.attributions.add(AttributionFactory.getAttribution(library));
+            this.attributions.add(library.getAttribution());
         }
     }
 
