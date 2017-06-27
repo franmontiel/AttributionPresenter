@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.franmontiel.attributionhelper.sample">
 
     <application
@@ -16,6 +17,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ListActivity"
+            android:label="@string/attributions"
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean" />
+
+        <activity
+            android:name=".DarkListActivity"
+            android:label="@string/attributions"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat"
+            tools:targetApi="jelly_bean" />
+
+        <activity
+            android:name=".CustomListActivity"
+            android:label="@string/attributions"
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean" />
     </application>
 
 </manifest>
