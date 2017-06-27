@@ -2,25 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
         android:id="@+id/name"
+        style="@style/AttributionName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:textColor="?attr/colorAccent" />
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/copyrightNotices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:ellipsize="end"
-        android:textColor="?android:attr/textColorPrimary" />
+        android:textColor="@android:color/white" />
 
     <LinearLayout
         android:id="@+id/licensesLayout"

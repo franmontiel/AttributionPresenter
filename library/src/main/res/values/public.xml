@@ -1,0 +1,5 @@
+<resources>
+    <public name="AttributionName" type="style" />
+    <public name="AttributionCopyright" type="style" />
+    <public name="AttributionLicense" type="style" />
+</resources>
