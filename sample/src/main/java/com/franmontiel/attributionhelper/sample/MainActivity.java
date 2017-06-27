@@ -1,17 +1,12 @@
 package com.franmontiel.attributionhelper.sample;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.franmontiel.attributionhelper.AttributionHelper;
-import com.franmontiel.attributionhelper.attribution.Attribution;
-import com.franmontiel.attributionhelper.attribution.Library;
-import com.franmontiel.attributionhelper.license.LicenseType;
-import com.franmontiel.attributionhelper.sample.util.AttributionHelperCreator;
+import com.franmontiel.attributionhelper.AttributionPresenter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,15 +15,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final AttributionHelper attributionHelper = AttributionHelperCreator.create(this);
+        final AttributionPresenter attributionHelper = AttributionPresenterCreator.create(this);
 
         Button openDialog = (Button) findViewById(R.id.openDialog);
         openDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog dialog = attributionHelper.getDialog();
-                dialog.setTitle(R.string.attributions);
-                dialog.show();
+                attributionHelper.showDialog(getString(R.string.attributions));
             }
         });
 

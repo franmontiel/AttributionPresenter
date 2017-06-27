@@ -2,14 +2,17 @@ package com.franmontiel.attributionhelper;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.franmontiel.attributionhelper.attribution.Attribution;
-import com.franmontiel.attributionhelper.license.License;
+import com.franmontiel.attributionhelper.entities.Attribution;
+import com.franmontiel.attributionhelper.entities.LicenseInfo;
+import com.franmontiel.attributionhelper.listeners.OnAttributionClickListener;
+import com.franmontiel.attributionhelper.listeners.OnLicenseClickListener;
 import com.franmontiel.attributionhelper.util.BrowserOpener;
 
 import java.util.ArrayList;
@@ -23,17 +26,22 @@ class AttributionAdapter extends BaseAdapter {
     private int itemLayout;
     @LayoutRes
     private int licenseLayout;
+    @Nullable
+    private final OnAttributionClickListener onAttributionClickListener;
+    @Nullable
+    private final OnLicenseClickListener onLicenseClickListener;
 
-    AttributionAdapter(@LayoutRes int itemLayout, @LayoutRes int licenseLayout) {
-        this.items = new ArrayList<>();
+    AttributionAdapter(Collection<Attribution> attributions,
+                       @LayoutRes int itemLayout,
+                       @LayoutRes int licenseLayout,
+                       @Nullable OnAttributionClickListener onAttributionClickListener,
+                       @Nullable OnLicenseClickListener onLicenseClickListener) {
+        this.items = new ArrayList<>(attributions.size());
+        this.items.addAll(attributions);
         this.itemLayout = itemLayout;
         this.licenseLayout = licenseLayout;
-    }
-
-    void setItems(Collection<Attribution> attributions) {
-        this.items.clear();
-        this.items.addAll(attributions);
-        notifyDataSetChanged();
+        this.onAttributionClickListener = onAttributionClickListener;
+        this.onLicenseClickListener = onLicenseClickListener;
     }
 
     @Override
@@ -77,33 +85,41 @@ class AttributionAdapter extends BaseAdapter {
         holder.name.setText(attribution.getName());
         holder.copyrightNotices.setText(attribution.getFormattedCopyrightNotices());
         holder.licensesLayout.removeAllViews();
-        for (License license : attribution.getLicenses()) {
-            addLicense(parent.getContext(), holder.licensesLayout, license);
+        for (LicenseInfo licenseInfo : attribution.getLicensesInfo()) {
+            addLicense(parent.getContext(), holder.licensesLayout, licenseInfo);
         }
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BrowserOpener.open(parent.getContext(), attribution.getWebsite());
+                if (onAttributionClickListener == null ||
+                        !onAttributionClickListener.onAttributionClick(attribution)) {
+
+                    BrowserOpener.open(parent.getContext(), attribution.getWebsite());
+                }
             }
         });
 
         return convertView;
     }
 
-    private void addLicense(final Context context, ViewGroup licensesLayout, final License license) {
+    private void addLicense(final Context context, ViewGroup licensesLayout, final LicenseInfo licenseInfo) {
         View inflatedView = LayoutInflater.from(context).inflate(licenseLayout, licensesLayout, false);
         TextView licenseTextView = (TextView) inflatedView.findViewById(R.id.license);
 
         if (licenseTextView == null) {
-            throw new IllegalStateException("License layout does not contain a required TextView with android:id=\"@+id/license\"");
+            throw new IllegalStateException("LicenseInfo layout does not contain a required TextView with android:id=\"@+id/licenseInfo\"");
         }
 
-        licenseTextView.setText(license.getName());
+        licenseTextView.setText(licenseInfo.getName());
         licenseTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BrowserOpener.open(context, license.getTextUrl());
+                if (onLicenseClickListener == null ||
+                        !onLicenseClickListener.onLicenseClick(licenseInfo)) {
+
+                    BrowserOpener.open(context, licenseInfo.getTextUrl());
+                }
             }
         });
         licensesLayout.addView(inflatedView);

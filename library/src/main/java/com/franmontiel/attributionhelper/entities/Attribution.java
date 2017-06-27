@@ -1,25 +1,21 @@
-package com.franmontiel.attributionhelper.attribution;
+package com.franmontiel.attributionhelper.entities;
 
 import android.support.annotation.NonNull;
-
-import com.franmontiel.attributionhelper.license.License;
-import com.franmontiel.attributionhelper.license.LicenseFactory;
-import com.franmontiel.attributionhelper.license.LicenseType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Attribution implements Comparable<Attribution> {
+public final class Attribution implements Comparable<Attribution> {
 
     private String name;
     private List<String> copyrightNotices;
-    private List<License> licenses;
+    private List<LicenseInfo> licensesInfo;
     private String website;
 
-    private Attribution(String name, List<String> copyrightNotices, List<License> licenses, String website) {
+    private Attribution(String name, List<String> copyrightNotices, List<LicenseInfo> licensesInfo, String website) {
         this.name = name;
         this.copyrightNotices = copyrightNotices;
-        this.licenses = licenses;
+        this.licensesInfo = licensesInfo;
         this.website = website;
     }
 
@@ -39,8 +35,8 @@ public class Attribution implements Comparable<Attribution> {
         return builder.toString().replaceFirst("\n", "");
     }
 
-    public List<License> getLicenses() {
-        return licenses;
+    public List<LicenseInfo> getLicensesInfo() {
+        return licensesInfo;
     }
 
     public String getWebsite() {
@@ -52,16 +48,45 @@ public class Attribution implements Comparable<Attribution> {
         return this.name.compareToIgnoreCase(o.name);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Attribution)) return false;
+
+        Attribution that = (Attribution) o;
+
+        if (!name.equals(that.name)) return false;
+
+        for (String copyrightNotice : copyrightNotices) {
+            if (!that.copyrightNotices.contains(copyrightNotice)) return false;
+        }
+
+        for (LicenseInfo licenseInfo : licensesInfo) {
+            if (!that.licensesInfo.contains(licenseInfo)) return false;
+        }
+
+        return website.equals(that.website);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + copyrightNotices.hashCode();
+        result = 31 * result + licensesInfo.hashCode();
+        result = 31 * result + website.hashCode();
+        return result;
+    }
+
     public static class Builder {
         private String name;
         private List<String> copyrightNotices;
-        private List<License> licenses;
+        private List<LicenseInfo> licenseInfos;
         private String website;
 
         public Builder(String name) {
             this.name = name;
             this.copyrightNotices = new ArrayList<>();
-            this.licenses = new ArrayList<>();
+            this.licenseInfos = new ArrayList<>();
             this.website = "";
         }
 
@@ -75,13 +100,13 @@ public class Attribution implements Comparable<Attribution> {
             return this;
         }
 
-        public Builder addLicense(License license) {
-            licenses.add(license);
+        public Builder addLicense(String name, String textUrl) {
+            licenseInfos.add(new LicenseInfo(name, textUrl));
             return this;
         }
 
-        public Builder addLicense(LicenseType licenseType) {
-            licenses.add(LicenseFactory.getLicense(licenseType));
+        public Builder addLicense(License license) {
+            licenseInfos.add(license.getLicenseInfo());
             return this;
         }
 
@@ -91,7 +116,7 @@ public class Attribution implements Comparable<Attribution> {
         }
 
         public Attribution build() {
-            return new Attribution(name, copyrightNotices, licenses, website);
+            return new Attribution(name, copyrightNotices, licenseInfos, website);
         }
     }
 }

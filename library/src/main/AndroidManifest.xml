@@ -1,5 +1,9 @@
-<manifest package="com.franmontiel.attributionhelper">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.franmontiel.attributionhelper">
 
-    <application />
+    <application>
+        <activity android:name=".AttributionActivity"></activity>
+    </application>
 
 </manifest>

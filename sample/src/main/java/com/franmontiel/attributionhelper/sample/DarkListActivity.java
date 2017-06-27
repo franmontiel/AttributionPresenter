@@ -5,8 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 
-import com.franmontiel.attributionhelper.sample.util.AttributionHelperCreator;
-
 public class DarkListActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +14,6 @@ public class DarkListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         ListView list = (ListView) findViewById(R.id.list);
-        list.setAdapter(AttributionHelperCreator.create(this).getAdapter());
+        list.setAdapter(AttributionPresenterCreator.create(this).getAdapter());
     }
 }
