@@ -2,14 +2,12 @@ package com.franmontiel.attributionhelper;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.AdapterView;
 
 import com.franmontiel.attributionhelper.attribution.Attribution;
 import com.franmontiel.attributionhelper.attribution.AttributionFactory;
 import com.franmontiel.attributionhelper.attribution.Library;
-import com.franmontiel.attributionhelper.util.BrowserOpener;
 
 import java.util.Arrays;
 import java.util.SortedSet;
@@ -19,45 +17,51 @@ public class AttributionHelper {
 
     private Context context;
     private SortedSet<Attribution> attributions;
-    private AttributionAdapter attributionAdapter;
 
     public AttributionHelper(Context context) {
         this.context = context;
-        this.attributionAdapter = new AttributionAdapter(
-                R.layout.item_attribution,
-                R.layout.sublayout_license_text
-        );
         this.attributions = new TreeSet<>();
     }
 
-    public void setAttributions(Attribution... attributions) {
+    public void addAttributions(Attribution... attributions) {
         this.attributions.addAll(Arrays.asList(attributions));
-        this.attributionAdapter.setItems(this.attributions);
     }
 
-    public void setAttributions(Library... libraries) {
+    public void addAttributions(Library... libraries) {
         for (Library library : libraries) {
             this.attributions.add(AttributionFactory.getAttribution(library));
         }
-        this.attributionAdapter.setItems(this.attributions);
-    }
-
-    public AttributionAdapter getAdapter() {
-        return attributionAdapter;
     }
 
     public Dialog getDialog() {
-        AlertDialog dialog = new AlertDialog.Builder(context)
-                .setAdapter(attributionAdapter, null)
-                .create();
+        return getDialog(0, 0);
+    }
 
-        dialog.getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Attribution item = (Attribution) attributionAdapter.getItem(position);
-                BrowserOpener.open(context, item.getWebsite());
-            }
-        });
-        return dialog;
+    public Dialog getDialog(@LayoutRes int itemLayout, @LayoutRes int licenseLayout) {
+        return new AlertDialog.Builder(context)
+                .setAdapter(getAdapter(itemLayout, licenseLayout), null)
+                .create();
+    }
+
+    public AttributionAdapter getAdapter() {
+        return getAdapter(0, 0);
+    }
+
+    public AttributionAdapter getAdapter(@LayoutRes int itemLayout, @LayoutRes int licenseLayout) {
+        if (itemLayout == 0) {
+            itemLayout = R.layout.default_item_attribution;
+        }
+        if (licenseLayout == 0) {
+            licenseLayout = R.layout.default_license_text;
+        }
+
+        AttributionAdapter attributionAdapter = new AttributionAdapter(
+                itemLayout,
+                licenseLayout
+        );
+
+        attributionAdapter.setItems(this.attributions);
+
+        return attributionAdapter;
     }
 }

@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class AttributionAdapter extends BaseAdapter {
+class AttributionAdapter extends BaseAdapter {
 
     private List<Attribution> items;
     @LayoutRes
@@ -24,13 +24,13 @@ public class AttributionAdapter extends BaseAdapter {
     @LayoutRes
     private int licenseLayout;
 
-    public AttributionAdapter(@LayoutRes int itemLayout, @LayoutRes int licenseLayout) {
+    AttributionAdapter(@LayoutRes int itemLayout, @LayoutRes int licenseLayout) {
         this.items = new ArrayList<>();
         this.itemLayout = itemLayout;
         this.licenseLayout = licenseLayout;
     }
 
-    public void setItems(Collection<Attribution> attributions) {
+    void setItems(Collection<Attribution> attributions) {
         this.items.clear();
         this.items.addAll(attributions);
         notifyDataSetChanged();
@@ -42,7 +42,7 @@ public class AttributionAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Attribution getItem(int position) {
         return items.get(position);
     }
 
@@ -52,8 +52,7 @@ public class AttributionAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
+    public View getView(int position, View convertView, final ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);
@@ -61,11 +60,19 @@ public class AttributionAdapter extends BaseAdapter {
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.copyrightNotices = (TextView) convertView.findViewById(R.id.copyrightNotices);
             holder.licensesLayout = (ViewGroup) convertView.findViewById(R.id.licensesLayout);
+
+            if (holder.name == null || holder.copyrightNotices == null || holder.licensesLayout == null) {
+                throw new IllegalStateException("Item layout must contain all of the following required views:\n" +
+                        "  - TextView with android:id=\"@+id/name\"\n" +
+                        "  - TextView with android:id=\"@+id/copyrightNotices\"\n" +
+                        "  - ViewGroup descendant with android:id=\"@+id/licensesLayout\" ");
+            }
+
             convertView.setTag(holder);
         } else {
             holder = ((ViewHolder) convertView.getTag());
         }
-        Attribution attribution = (Attribution) getItem(position);
+        final Attribution attribution = getItem(position);
 
         holder.name.setText(attribution.getName());
         holder.copyrightNotices.setText(attribution.getFormattedCopyrightNotices());
@@ -74,12 +81,24 @@ public class AttributionAdapter extends BaseAdapter {
             addLicense(parent.getContext(), holder.licensesLayout, license);
         }
 
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BrowserOpener.open(parent.getContext(), attribution.getWebsite());
+            }
+        });
+
         return convertView;
     }
 
     private void addLicense(final Context context, ViewGroup licensesLayout, final License license) {
         View inflatedView = LayoutInflater.from(context).inflate(licenseLayout, licensesLayout, false);
         TextView licenseTextView = (TextView) inflatedView.findViewById(R.id.license);
+
+        if (licenseTextView == null) {
+            throw new IllegalStateException("License layout does not contain a required TextView with android:id=\"@+id/license\"");
+        }
+
         licenseTextView.setText(license.getName());
         licenseTextView.setOnClickListener(new View.OnClickListener() {
             @Override
