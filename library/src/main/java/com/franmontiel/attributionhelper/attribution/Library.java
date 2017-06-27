@@ -3,24 +3,24 @@ package com.franmontiel.attributionhelper.attribution;
 public enum Library {
 
     // Presentation
-    ButterKnife,
-    Picasso,
-    Glide,
+    BUTTER_KNIFE,
+    PICASSO,
+    GLIDE,
 
     // Architecture
-    Dagger,
-    Dagger2,
-    EventBus,
-    RxJava,
-    RxAndroid,
+    DAGGER,
+    DAGGER_2,
+    EVENT_BUS,
+    RX_JAVA,
+    RX_ANDROID,
 
     // Networking
-    OkHttp,
-    Retrofit,
+    OK_HTTP,
+    RETROFIT,
 
     // Parser
-    Gson,
+    GSON,
 
     // ORM & Database
-    Realm,
+    REALM
 }
