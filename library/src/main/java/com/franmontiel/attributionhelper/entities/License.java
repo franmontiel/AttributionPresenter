@@ -1,5 +1,8 @@
 package com.franmontiel.attributionhelper.entities;
 
+/**
+ * An enumeration of the most common open source licenses.
+ */
 public enum License {
     APACHE("Apache License 2.0", "http://www.apache.org/licenses/LICENSE-2.0"),
     BSD_2("BSD-2-Clause", "https://opensource.org/licenses/BSD-2-Clause"),

@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * Adapter used to show attributions on a ListView.
+ */
 class AttributionAdapter extends BaseAdapter {
 
     private List<Attribution> items;
@@ -73,7 +76,7 @@ class AttributionAdapter extends BaseAdapter {
                 throw new IllegalStateException("Item layout must contain all of the following required views:\n" +
                         "  - TextView with android:id=\"@+id/name\"\n" +
                         "  - TextView with android:id=\"@+id/copyrightNotices\"\n" +
-                        "  - ViewGroup descendant with android:id=\"@+id/licensesLayout\" ");
+                        "  - ViewGroup descendant with android:id=\"@+id/licensesLayout\"");
             }
 
             convertView.setTag(holder);

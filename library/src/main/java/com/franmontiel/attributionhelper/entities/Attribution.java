@@ -5,6 +5,9 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that contain information needed to comply with library licenses.
+ */
 public final class Attribution implements Comparable<Attribution> {
 
     private String name;

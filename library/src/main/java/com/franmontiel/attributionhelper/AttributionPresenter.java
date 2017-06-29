@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Class to present a view to show license attributions.
+ */
 public final class AttributionPresenter {
 
     private Context context;
@@ -40,6 +43,12 @@ public final class AttributionPresenter {
         this.onLicenseClickListener = onLicenseClickListener;
     }
 
+    /**
+     * Show a dialog with the configured attributions.
+     *
+     * @param title optional title of the dialog
+     * @return the dialog itself
+     */
     public Dialog showDialog(@Nullable String title) {
         return new AlertDialog.Builder(context)
                 .setTitle(title)
@@ -47,6 +56,11 @@ public final class AttributionPresenter {
                 .show();
     }
 
+    /**
+     * Gets the adapter used to show the attributions on a ListView.
+     *
+     * @return
+     */
     public AttributionAdapter getAdapter() {
         if (attributionAdapter == null) {
             attributionAdapter = new AttributionAdapter(
@@ -87,11 +101,32 @@ public final class AttributionPresenter {
             return this;
         }
 
+        /**
+         * Sets an optional custom layout for the attribution item.
+         * <p>
+         * The layout must contain all of the following views:
+         * <ul>
+         * <li>a TextView with android:id="@+id/name"
+         * <li>a TextView with android:id="@+id/copyrightNotices"
+         * <li>a ViewGroup descendant with android:id="@+id/licensesLayout"
+         * </ul>
+         *
+         * @param itemLayoutResId the layout file to be used
+         * @return
+         */
         public Builder setItemLayout(@LayoutRes int itemLayoutResId) {
             this.itemLayout = itemLayoutResId;
             return this;
         }
 
+        /**
+         * Sets an optional custom layout for the licenses names
+         * <p>
+         * The layout must contain a TextView with android:id="@+id/licenseInfo"
+         *
+         * @param licenseLayoutResId the layout file to be used
+         * @return
+         */
         public Builder setLicenseLayout(@LayoutRes int licenseLayoutResId) {
             this.licenseLayout = licenseLayoutResId;
             return this;

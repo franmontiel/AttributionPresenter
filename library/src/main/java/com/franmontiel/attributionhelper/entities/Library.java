@@ -1,5 +1,8 @@
 package com.franmontiel.attributionhelper.entities;
 
+/**
+ * An enumeration of common Android libraries with their Attribution information.
+ */
 public enum Library {
 
     // Presentation
