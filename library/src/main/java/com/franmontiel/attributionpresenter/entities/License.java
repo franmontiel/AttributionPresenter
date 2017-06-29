@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper.entities;
+package com.franmontiel.attributionpresenter.entities;
 
 /**
  * An enumeration of the most common open source licenses.

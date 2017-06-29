@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AttributionHelper</string>
+    <string name="app_name">AttributionPresenter Sample</string>
 
-    <string name="attributions">Attributions</string>
+    <string name="attributions">Open Source Licenses</string>
 </resources>

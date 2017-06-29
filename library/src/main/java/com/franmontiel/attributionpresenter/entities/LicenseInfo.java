@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper.entities;
+package com.franmontiel.attributionpresenter.entities;
 
 public final class LicenseInfo {
     private String name;

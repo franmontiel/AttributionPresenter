@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper;
+package com.franmontiel.attributionpresenter;
 
 import org.junit.Test;
 

@@ -1,6 +1,6 @@
-package com.franmontiel.attributionhelper.listeners;
+package com.franmontiel.attributionpresenter.listeners;
 
-import com.franmontiel.attributionhelper.entities.Attribution;
+import com.franmontiel.attributionpresenter.entities.Attribution;
 
 /**
  * Interface definition for a callback to be invoked when the attribution item is clicked.

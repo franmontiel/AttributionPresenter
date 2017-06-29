@@ -1,13 +1,13 @@
-package com.franmontiel.attributionhelper.sample;
+package com.franmontiel.attributionpresenter.sample;
 
 import android.content.Context;
 
-import com.franmontiel.attributionhelper.AttributionPresenter;
-import com.franmontiel.attributionhelper.entities.Attribution;
-import com.franmontiel.attributionhelper.entities.Library;
-import com.franmontiel.attributionhelper.entities.License;
-import com.franmontiel.attributionhelper.listeners.OnAttributionClickListener;
-import com.franmontiel.attributionhelper.listeners.OnLicenseClickListener;
+import com.franmontiel.attributionpresenter.AttributionPresenter;
+import com.franmontiel.attributionpresenter.entities.Attribution;
+import com.franmontiel.attributionpresenter.entities.Library;
+import com.franmontiel.attributionpresenter.entities.License;
+import com.franmontiel.attributionpresenter.listeners.OnAttributionClickListener;
+import com.franmontiel.attributionpresenter.listeners.OnLicenseClickListener;
 
 public class AttributionPresenterCreator {
 

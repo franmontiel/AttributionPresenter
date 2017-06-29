@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper;
+package com.franmontiel.attributionpresenter;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

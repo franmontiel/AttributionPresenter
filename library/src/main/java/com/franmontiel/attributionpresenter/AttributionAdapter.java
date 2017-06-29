@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper;
+package com.franmontiel.attributionpresenter;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;
@@ -9,11 +9,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.franmontiel.attributionhelper.entities.Attribution;
-import com.franmontiel.attributionhelper.entities.LicenseInfo;
-import com.franmontiel.attributionhelper.listeners.OnAttributionClickListener;
-import com.franmontiel.attributionhelper.listeners.OnLicenseClickListener;
-import com.franmontiel.attributionhelper.util.BrowserOpener;
+import com.franmontiel.attributionpresenter.entities.Attribution;
+import com.franmontiel.attributionpresenter.entities.LicenseInfo;
+import com.franmontiel.attributionpresenter.listeners.OnAttributionClickListener;
+import com.franmontiel.attributionpresenter.listeners.OnLicenseClickListener;
+import com.franmontiel.attributionpresenter.util.BrowserOpener;
 
 import java.util.ArrayList;
 import java.util.Collection;

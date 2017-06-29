@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.franmontiel.attributionhelper.sample">
+    package="com.franmontiel.attributionpresenter.sample">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.franmontiel.attributionhelper.sample.MainActivity">
+        <activity android:name="com.franmontiel.attributionpresenter.sample.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,22 +18,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListActivity"
+            android:name="com.franmontiel.attributionpresenter.sample.ListActivity"
             android:label="@string/attributions"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.franmontiel.attributionpresenter.sample.MainActivity"
             tools:targetApi="jelly_bean" />
 
         <activity
-            android:name=".DarkListActivity"
+            android:name="com.franmontiel.attributionpresenter.sample.DarkListActivity"
             android:label="@string/attributions"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.franmontiel.attributionpresenter.sample.MainActivity"
             android:theme="@style/Theme.AppCompat"
             tools:targetApi="jelly_bean" />
 
         <activity
-            android:name=".CustomListActivity"
+            android:name="com.franmontiel.attributionpresenter.sample.CustomListActivity"
             android:label="@string/attributions"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.franmontiel.attributionpresenter.sample.MainActivity"
             tools:targetApi="jelly_bean" />
     </application>
 

@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper.sample;
+package com.franmontiel.attributionpresenter.sample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,10 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.franmontiel.attributionhelper.entities.Attribution;
-import com.franmontiel.attributionhelper.entities.LicenseInfo;
-import com.franmontiel.attributionhelper.listeners.OnAttributionClickListener;
-import com.franmontiel.attributionhelper.listeners.OnLicenseClickListener;
+import com.franmontiel.attributionpresenter.entities.Attribution;
+import com.franmontiel.attributionpresenter.entities.LicenseInfo;
+import com.franmontiel.attributionpresenter.listeners.OnAttributionClickListener;
+import com.franmontiel.attributionpresenter.listeners.OnLicenseClickListener;
 
 public class ListActivity extends AppCompatActivity {
 

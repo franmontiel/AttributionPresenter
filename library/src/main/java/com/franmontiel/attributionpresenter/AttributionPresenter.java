@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper;
+package com.franmontiel.attributionpresenter;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -6,10 +6,10 @@ import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
-import com.franmontiel.attributionhelper.entities.Attribution;
-import com.franmontiel.attributionhelper.entities.Library;
-import com.franmontiel.attributionhelper.listeners.OnAttributionClickListener;
-import com.franmontiel.attributionhelper.listeners.OnLicenseClickListener;
+import com.franmontiel.attributionpresenter.entities.Attribution;
+import com.franmontiel.attributionpresenter.entities.Library;
+import com.franmontiel.attributionpresenter.listeners.OnAttributionClickListener;
+import com.franmontiel.attributionpresenter.listeners.OnLicenseClickListener;
 
 import java.util.Arrays;
 import java.util.SortedSet;

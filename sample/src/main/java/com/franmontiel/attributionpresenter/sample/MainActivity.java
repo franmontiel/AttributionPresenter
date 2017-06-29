@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper.sample;
+package com.franmontiel.attributionpresenter.sample;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.franmontiel.attributionhelper.AttributionPresenter;
+import com.franmontiel.attributionpresenter.AttributionPresenter;
 
 public class MainActivity extends AppCompatActivity {
 

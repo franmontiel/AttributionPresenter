@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper.util;
+package com.franmontiel.attributionpresenter.util;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;

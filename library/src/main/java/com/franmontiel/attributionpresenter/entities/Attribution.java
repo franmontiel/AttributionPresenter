@@ -1,4 +1,4 @@
-package com.franmontiel.attributionhelper.entities;
+package com.franmontiel.attributionpresenter.entities;
 
 import android.support.annotation.NonNull;
 

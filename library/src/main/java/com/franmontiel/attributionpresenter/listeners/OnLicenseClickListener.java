@@ -1,6 +1,6 @@
-package com.franmontiel.attributionhelper.listeners;
+package com.franmontiel.attributionpresenter.listeners;
 
-import com.franmontiel.attributionhelper.entities.LicenseInfo;
+import com.franmontiel.attributionpresenter.entities.LicenseInfo;
 
 /**
  * Interface definition for a callback to be invoked when a license view is clicked.
