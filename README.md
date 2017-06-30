@@ -50,12 +50,12 @@ Or get an adapter to use the list of attributions in a ListView:
 ```java
 attributionPresenter.getAdapter();
 ```
-The default behavior when the user clicks on an attribution item or on a license name is to open the browser with the website or license text. This behavior can be changed by setting the appropriate listeners in the `Builder`:
+The default behavior when the user clicks on an attribution item or on a license name is to open the browser with the website or license text. This behavior can be changed by setting the appropriate listeners in the `Builder`.
 
 Styling
 -----
-The default style will adapt to Light and Dark themes automatically but you can always change the style of the AttributionItems:
-* Overriding the default styles in your style.xml:
+The default style will adapt to Light and Dark themes automatically but you can always change the style of the attribution items:
+* Overriding the default styles in your style.xml.
  ```xml
     <style name="AttributionName" parent="TextAppearance.AppCompat">
         <item name="android:textColor">?attr/colorAccent</item>
