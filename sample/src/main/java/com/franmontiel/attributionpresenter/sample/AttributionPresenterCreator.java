@@ -30,10 +30,10 @@ public class AttributionPresenterCreator {
     private static AttributionPresenter.Builder createBaseAttributions(Context context) {
         return new AttributionPresenter.Builder(context)
                 .addAttributions(
-                        new Attribution.Builder("PersistentCookieJar")
-                                .addCopyrightNotice("Copyright 2016 Francisco José Montiel Navarro")
+                        new Attribution.Builder("AttributionPresenter")
+                                .addCopyrightNotice("Copyright 2017 Francisco José Montiel Navarro")
                                 .addLicense(License.APACHE)
-                                .setWebsite("https://github.com/franmontiel/PersistentCookieJar")
+                                .setWebsite("https://github.com/franmontiel/AttributionPresenter")
                                 .build()
                 )
                 .addAttributions(
