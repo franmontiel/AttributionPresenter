@@ -55,7 +55,7 @@ The default behavior when the user clicks on an attribution item or on a license
 Styling
 -----
 The default style will adapt to Light and Dark themes automatically but you can always change the style of the attribution items:
-* Overriding the default styles in your style.xml.
+* Overriding the default styles in your styles.xml.
  ```xml
     <style name="AttributionName" parent="TextAppearance.AppCompat">
         <item name="android:textColor">?attr/colorAccent</item>
