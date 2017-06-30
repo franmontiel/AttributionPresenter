@@ -42,7 +42,7 @@ AttributionPresenter attributionPresenter = new AttributionPresenter.Builder(con
                         Library.REALM)
                 .build();
 ```
-Then you can directly show a dialog with the attribution:
+Then you can directly show a dialog with the attributions:
 ```java
 attributionPresenter.showDialog("Open Source Libraries");
 ```
