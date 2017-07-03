@@ -24,7 +24,7 @@ dependencies {
 ```
 Usage
 -----
-Create an instance of `AttributionPresenter`, adding using the `Builder`:
+Create an instance of `AttributionPresenter` using the `Builder`:
 ```java
 AttributionPresenter attributionPresenter = new AttributionPresenter.Builder(context)
                 .addAttributions(
