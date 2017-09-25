@@ -94,7 +94,7 @@ public enum Library {
             .build());
 
     // UI & MaterialDesign (Floating Action Menu & FABs)
-    REALM(new Attribution.Builder("ClansFAB")
+    REALM(new Attribution.Builder("Clans_FAB")
             .addCopyrightNotice("Copyright 2015 Dmytro Tarianyk.")
             .addLicense(License.APACHE)
             .setWebsite("https://github.com/Clans/FloatingActionButton")
