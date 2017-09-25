@@ -93,6 +93,13 @@ public enum Library {
             .setWebsite("https://github.com/realm/realm-java")
             .build());
 
+    // UI & MaterialDesign (Floating Action Menu & FABs)
+    REALM(new Attribution.Builder("ClansFAB")
+            .addCopyrightNotice("Copyright 2015 Dmytro Tarianyk.")
+            .addLicense(License.APACHE)
+            .setWebsite("https://github.com/Clans/FloatingActionButton")
+            .build());
+
     private Attribution attribution;
 
     Library(Attribution attribution) {
