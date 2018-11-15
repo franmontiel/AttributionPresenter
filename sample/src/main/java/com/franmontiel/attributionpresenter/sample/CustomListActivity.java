@@ -29,7 +29,7 @@ public class CustomListActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_list);
 
-        ListView list = (ListView) findViewById(R.id.list);
+        ListView list = findViewById(R.id.list);
         list.setAdapter(AttributionPresenterCreator.create(this,
                 R.layout.custom_item_attribution,
                 R.layout.custom_license_text).getAdapter());
