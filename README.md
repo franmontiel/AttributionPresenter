@@ -19,7 +19,7 @@ allprojects {
 Step 2. Add the dependency
 ```groovy
 dependencies {
-        compile 'com.github.franmontiel:AttributionPresenter:1.0'
+        compile 'com.github.franmontiel:AttributionPresenter:1.0.1'
 }   
 ```
 Usage
