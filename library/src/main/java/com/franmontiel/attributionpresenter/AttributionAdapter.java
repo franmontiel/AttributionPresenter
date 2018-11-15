@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * Adapter used to show attributions on a ListView.
  */
-class AttributionAdapter extends BaseAdapter {
+public final class AttributionAdapter extends BaseAdapter {
 
     private List<Attribution> items;
     @LayoutRes
