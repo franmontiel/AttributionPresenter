@@ -18,9 +18,10 @@ package com.franmontiel.attributionpresenter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
+
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.franmontiel.attributionpresenter.entities.Attribution;
 import com.franmontiel.attributionpresenter.entities.Library;
@@ -44,6 +45,7 @@ public final class AttributionPresenter {
     private OnLicenseClickListener onLicenseClickListener;
 
     private AttributionAdapter attributionAdapter;
+    private AttributionRecyclerAdapter attributionRecyclerAdapter;
 
     private AttributionPresenter(Context context,
                                  SortedSet<Attribution> attributions,
@@ -88,6 +90,25 @@ public final class AttributionPresenter {
             );
         }
         return attributionAdapter;
+    }
+
+    /**
+     * Gets the adapter used to show the attributions on a RecyclerView.
+     *
+     * @return attributionRecyclerAdapter
+     */
+    public AttributionRecyclerAdapter getRecyclerAdapter() {
+        if (attributionRecyclerAdapter == null) {
+            attributionRecyclerAdapter = new AttributionRecyclerAdapter(
+                    context,
+                    attributions,
+                    itemLayout,
+                    licenseLayout,
+                    onAttributionClickListener,
+                    onLicenseClickListener
+            );
+        }
+        return attributionRecyclerAdapter;
     }
 
     public static class Builder {
