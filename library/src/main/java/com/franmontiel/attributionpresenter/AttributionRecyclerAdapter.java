@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2017  Francisco José Montiel Navarro.
+ * Copyright (c)  2019 Simone Lampacrescia [PamposDev].
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,11 +20,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.franmontiel.attributionpresenter.entities.Attribution;
 import com.franmontiel.attributionpresenter.entities.LicenseInfo;
@@ -37,10 +38,10 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Adapter used to show attributions on a ListView.
+ * Created by @PamposDev on 22/09/2019.
  */
-public final class AttributionAdapter extends BaseAdapter {
-
+public class AttributionRecyclerAdapter extends RecyclerView.Adapter<AttributionRecyclerAdapter.ViewHolder> {
+    private Context context;
     private List<Attribution> items;
     @LayoutRes
     private int itemLayout;
@@ -51,11 +52,13 @@ public final class AttributionAdapter extends BaseAdapter {
     @Nullable
     private final OnLicenseClickListener onLicenseClickListener;
 
-    AttributionAdapter(Collection<Attribution> attributions,
-                       @LayoutRes int itemLayout,
-                       @LayoutRes int licenseLayout,
-                       @Nullable OnAttributionClickListener onAttributionClickListener,
-                       @Nullable OnLicenseClickListener onLicenseClickListener) {
+    AttributionRecyclerAdapter(Context context,
+                               Collection<Attribution> attributions,
+                               @LayoutRes int itemLayout,
+                               @LayoutRes int licenseLayout,
+                               @Nullable OnAttributionClickListener onAttributionClickListener,
+                               @Nullable OnLicenseClickListener onLicenseClickListener) {
+        this.context = context;
         this.items = new ArrayList<>(attributions.size());
         this.items.addAll(attributions);
         this.itemLayout = itemLayout;
@@ -64,66 +67,43 @@ public final class AttributionAdapter extends BaseAdapter {
         this.onLicenseClickListener = onLicenseClickListener;
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return items.size();
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(
+                LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false)
+        );
     }
 
     @Override
-    public Attribution getItem(int position) {
-        return items.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, final ViewGroup parent) {
-        ViewHolder holder;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(parent.getContext()).inflate(itemLayout, parent, false);
-            holder = new ViewHolder();
-            holder.name = (TextView) convertView.findViewById(R.id.name);
-            holder.copyrightNotices = (TextView) convertView.findViewById(R.id.copyrightNotices);
-            holder.licensesLayout = (ViewGroup) convertView.findViewById(R.id.licensesLayout);
-
-            if (holder.name == null || holder.copyrightNotices == null || holder.licensesLayout == null) {
-                throw new IllegalStateException("Item layout must contain all of the following required views:\n" +
-                        "  - TextView with android:id=\"@+id/name\"\n" +
-                        "  - TextView with android:id=\"@+id/copyrightNotices\"\n" +
-                        "  - ViewGroup descendant with android:id=\"@+id/licensesLayout\"");
-            }
-
-            convertView.setTag(holder);
-        } else {
-            holder = ((ViewHolder) convertView.getTag());
-        }
-        final Attribution attribution = getItem(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        final Attribution attribution = items.get(position);
 
         holder.name.setText(attribution.getName());
         holder.copyrightNotices.setText(attribution.getFormattedCopyrightNotices());
         holder.licensesLayout.removeAllViews();
         for (LicenseInfo licenseInfo : attribution.getLicensesInfo()) {
-            addLicense(parent.getContext(), holder.licensesLayout, licenseInfo);
+            addLicense(holder.licensesLayout, licenseInfo);
         }
 
-        convertView.setOnClickListener(new View.OnClickListener() {
+        holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onAttributionClickListener == null ||
                         !onAttributionClickListener.onAttributionClick(attribution)) {
 
-                    BrowserOpener.open(parent.getContext(), attribution.getWebsite());
+                    BrowserOpener.open(context, attribution.getWebsite());
                 }
             }
         });
-
-        return convertView;
     }
 
-    private void addLicense(final Context context, ViewGroup licensesLayout, final LicenseInfo licenseInfo) {
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+    private void addLicense(ViewGroup licensesLayout, final LicenseInfo licenseInfo) {
         View inflatedView = LayoutInflater.from(context).inflate(licenseLayout, licensesLayout, false);
         TextView licenseTextView = (TextView) inflatedView.findViewById(R.id.license);
 
@@ -145,9 +125,18 @@ public final class AttributionAdapter extends BaseAdapter {
         licensesLayout.addView(inflatedView);
     }
 
-    private static class ViewHolder {
-        TextView name;
-        TextView copyrightNotices;
-        ViewGroup licensesLayout;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        private View root;
+        private TextView name;
+        private TextView copyrightNotices;
+        private ViewGroup licensesLayout;
+
+        private ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            root = itemView;
+            name = (TextView) itemView.findViewById(R.id.name);
+            copyrightNotices = (TextView) itemView.findViewById(R.id.copyrightNotices);
+            licensesLayout = (ViewGroup) itemView.findViewById(R.id.licensesLayout);
+        }
     }
 }
